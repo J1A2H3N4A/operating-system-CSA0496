@@ -1,0 +1,34 @@
+Create a file or identify an existing file to demonstrate permissions and users.
+
+View the file's permissions using the ls -l command. The output will look something like this:
+.txt
+The first character (-) represents the file type (a dash indicates a regular file).
+The next three characters (rw-) represent the permissions for the file's owner (Read and Write, no Execute).
+The next three characters (r--) represent the permissions for the file's group (Read, no Write or Execute).
+The last three characters (r--) represent the permissions for others (Read, no Write or Execute).
+The number 1 represents the number of hard links to the file.
+owner is the username of the file's owner.
+group is the name of the file's group.
+1234 is the file's size in bytes.
+Oct 19 10:30 is the last modification timestamp.
+file.txt is the file name.
+Use the chmod command to change the file's permissions. For example, to give the group write permission, use chmod g+w file.txt.
+Re-run ls -l to confirm the updated permissions.
+You can also change the file's owner and group using the chown and chgrp commands, respectively.
+To create and manage user accounts, you can use the useradd and passwd commands.
+PROGRAM:
+
+#include <stdio.h> #include <stdlib.h> #include <sys/stat.h>
+
+int main() {
+char filename[] = "file.txt";
+int new_permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH; // rw-rw-r--
+
+if (chmod(filename, new_permissions) == 0) { printf("File permissions changed successfully.\n");
+} else {
+perror("chmod"); return 1;
+
+}
+
+return 0;
+}
